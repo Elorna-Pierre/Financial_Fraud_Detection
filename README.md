@@ -195,6 +195,16 @@ F1 Score: 0.8840
 weighted avg       1.00      1.00      1.00    166225
 </pre>
 
+
+
+![image](https://github.com/user-attachments/assets/8f42fadb-738b-4ffc-a89f-4d8df49b4e88)
+
+<pre>
+Final Model Results:
+Accuracy: 0.9993
+F1 Score: 0.8793
+</pre>
+
 ### Future Improvements
 
   - Use deep learning to improve fraud detection
