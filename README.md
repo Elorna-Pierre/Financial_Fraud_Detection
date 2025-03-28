@@ -26,6 +26,39 @@ The purpose of this project is to detect fraudulent transactions using machine l
 
     - isFraud: Fraud label (1 = Fraudulent, 0 = Not Fraud)
 
+<pre>
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from mpl_toolkits.mplot3d import Axes3D
+
+
+# Define correct column names for the dataset
+correct_column_names = ['step', 'type', 'amount', 'nameOrig', 'oldbalanceOrg', 'newbalanceOrig', 'nameDest', 'oldbalanceDest', 'newbalanceDest', 'isFraud', 'isFlaggedFraud']
+file_path = '/Users/sa3/Desktop/Financial Fraud Detection/Data/Raw Data.csv'
+
+# Importing the data with the correct column names
+df = pd.read_csv(file_path, names=correct_column_names, header=0)
+
+# Displaying the first few rows of the data
+df.head()
+</pre> 
+
+<pre>
+step      type    amount     nameOrig     oldbalanceOrg    newbalanceOrig    nameDest       oldbalanceDest   newbalanceDest  isFraud    isFlaggedFraud  
+0     1   PAYMENT   9839.64  C1231006815       170136.0       160296.36    M1979787155             0.0             0.0        0               0  
+1     1   PAYMENT   1864.28  C1666544295        21249.0        19384.72    M2044282225             0.0             0.0        0               0  
+2     1   TRANSFER   181.00  C1305486145          181.0            0.00    C553264065              0.0             0.0        1               0  
+3     1   CASH_OUT   181.00   C840083671          181.0            0.00    C38997010           21182.0             0.0        1               0  
+4     1   PAYMENT  11668.14  C2048537720        41554.0        29885.86    M1230701703             0.0             0.0        0               0
+</pre>
+
+
 ### Data Preprocessing:
 
 - Focused on TRANSFER and CASH_OUT transactions (where fraud is most common)
@@ -36,21 +69,48 @@ The purpose of this project is to detect fraudulent transactions using machine l
 
 - Sampled 30% of the dataset for faster processing
 
+
+
+![image](https://github.com/user-attachments/assets/1ca3dfcb-e5ef-498a-b576-eeaef614b266)
+
+
 ### Exploratory Data Analysis (EDA): 
 
 - Visualizations:
      
    - Bar and line plots of hourly transaction activity
 
-   - Box plots to analyze transaction amounts
+   - Pair plots to analyze transaction amounts
 
-   - Scatter plots to examine balance changes
+   - Scatter plots to examine numerical feature relationships
 
-   - Confusion matrices for model evaluation
+   - Heatmaps to show correlation between features
+  
+ 
+  ![image](https://github.com/user-attachments/assets/0b38d41f-9fc9-43d1-b7f2-86d47fdd1d5a)
+
+
+ 
+  ![image](https://github.com/user-attachments/assets/d61f4951-0264-4331-9647-16413e266e52)
+
+
+
+
+
+  ![image](https://github.com/user-attachments/assets/0120023e-6fd6-41ca-8c83-90fbe401caeb)
+
+
+
+
+
+  ![image](https://github.com/user-attachments/assets/863228c0-6a96-4f55-805a-713b7b64fd77)
+
+
+  
 
 - Model Training & Evaluation
 
-   - Models Used:
+  - Models Used:
 
     - Random Forest Classifier: Used as a baseline model
 
@@ -61,7 +121,45 @@ The purpose of this project is to detect fraudulent transactions using machine l
     - Applied RandomizedSearchCV to optimize model parameters
 
     - Selected best parameters for improved F1-score
+ 
+<pre>
 
+ # Dictionary to store results
+model_results = {}
+
+# Train models with default parameters to find the best one
+models = {
+    "Logistic Regression": LogisticRegression(),
+    "Naive Bayes": GaussianNB(),
+    "kNN Classifier": KNeighborsClassifier(),
+    "SVM Classifier": SVC(),
+    "Random Forest": RandomForestClassifier(random_state=42),
+    "Gradient Boosting": GradientBoostingClassifier(random_state=42)
+}
+
+print("\nTraining models with default parameters...\n")
+for name, model in models.items():
+    acc, f1 = train_evaluate_model(model, name)
+    model_results[name] = {'Accuracy': acc, 'F1 Score': f1}
+
+    # Find best model based on F1 Score
+best_model_name = max(model_results, key=lambda k: model_results[k]['F1 Score'])
+print(f"\nBest performing model: {best_model_name}")
+
+# Define hyperparameter tuning for best model
+param_grids = {
+    "Logistic Regression": {'C': uniform(0.1, 10), 'solver': ['liblinear', 'saga'], 'max_iter': [100, 200]},
+    "Naive Bayes": {'var_smoothing': np.logspace(0,-9, num=100)},
+    "kNN Classifier": {'n_neighbors': randint(3, 20), 'weights': ['uniform', 'distance'], 'p': [1, 2]},
+    "SVM Classifier": {'C': uniform(0.1, 10), 'kernel': ['linear', 'rbf'], 'gamma': ['scale', 'auto']},
+    "Random Forest": {'n_estimators': randint(50, 200), 'max_depth': randint(3, 20), 
+                      'min_samples_split': randint(2, 10), 'min_samples_leaf': randint(1, 10), 'bootstrap': [True, False]},
+    "Gradient Boosting": {'n_estimators': randint(50, 200), 'learning_rate': uniform(0.01, 0.2),
+                          'max_depth': randint(3, 20), 'min_samples_split': randint(2, 10), 'min_samples_leaf': randint(1, 10)}
+}
+</pre>
+
+ 
 - Performance Metrics:
 
   - Accuracy
@@ -76,21 +174,38 @@ The purpose of this project is to detect fraudulent transactions using machine l
 
 ### Results
 
-  - The optimized Gradient Boosting Classifier achieved the best F1-score
+  - The Random Forest achieved the best F1-score
 
   - Important features influencing fraud detection include transaction amount, balance differences, and transaction type
 
+
+   ![image](https://github.com/user-attachments/assets/491e6aca-7a08-4c17-b60f-76753bd9e7fb)
+
+<pre>
+Random Forest Performance:
+Accuracy: 0.9994
+F1 Score: 0.8840
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00    165726
+           1       0.99      0.80      0.88       499
+
+    accuracy                           1.00    166225
+   macro avg       0.99      0.90      0.94    166225
+weighted avg       1.00      1.00      1.00    166225
+</pre>
+
 ### Future Improvements
 
-  - Implement deep learning techniques for enhanced fraud detection
+  - Use deep learning to improve fraud detection
+    
+  - Detect fraud in real time with streaming data
 
-  - Incorporate real-time fraud detection using streaming data
-
-  - Experiment with anomaly detection methods
+  - Test different anomaly detection methods.
 
 ### How to Run
 
-1. Ensure you have Python installed along with required libraries (pandas, numpy, matplotlib, seaborn, sklearn)
+1. Ensure you have Python installed along with required libraries (pandas, numpy, matplotlib, seaborn, sklearn, scipy)
 
 2. Run the data preprocessing notebook to clean and prepare the dataset
 
