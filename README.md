@@ -26,7 +26,7 @@ Dataset:
 * Scaled numerical features using StandardScaler
 * Sampled 30% of the dataset for faster processing
 
-![alt text](image-7.png) 
+![alt text](ReadMeimage-1.png)
 
 
 ## Exploratory Data Analysis (EDA):
@@ -37,11 +37,11 @@ Dataset:
     * Scatter plots to examine balance changes
     * Confusion matrices for model evaluation
 
-![alt text](image-3.png) 
+![alt text](ReadMeimage-2.png)
 
-![alt text](image-4.png) 
+![alt text](ReadMeimage-4.png)
 
-![alt text](image-5.png)
+![alt text](ReadMeimage-5.png)
 
 
 
@@ -102,7 +102,7 @@ param_grids = {
 * The optimized Gradient Boosting Classifier achieved the best F1-score
 * Important features influencing fraud detection include transaction amount, balance differences, and transaction type
 
-![alt text](image.png) 
+![alt text](ReadMeimage-8.png) 
 
 <pre>
 Random Forest Performance:
@@ -118,7 +118,7 @@ F1 Score: 0.8840
 weighted avg       1.00      1.00      1.00    166225
 </pre>
 
-![alt text](image-6.png)
+![alt text](ReadMeimage-6.png)
 
 <pre>
 Final Model Results:
