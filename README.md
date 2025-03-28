@@ -46,7 +46,7 @@ Dataset:
 
 
 * Model Training & Evaluation
-    * Models Used:
+  * Models Used:
     * Random Forest Classifier: Used as a baseline model
     * Gradient Boosting Classifier: Used for improved predictive performance
     * Hyperparameter Tuning:
@@ -86,7 +86,7 @@ param_grids = {
                       'min_samples_split': randint(2, 10), 'min_samples_leaf': randint(1, 10), 'bootstrap': [True, False]},
     "Gradient Boosting": {'n_estimators': randint(50, 200), 'learning_rate': uniform(0.01, 0.2),
                           'max_depth': randint(3, 20), 'min_samples_split': randint(2, 10), 'min_samples_leaf': randint(1, 10)}
-
+} 
 </pre>
 
 
