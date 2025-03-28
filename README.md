@@ -34,14 +34,12 @@ The purpose of this project is to detect fraudulent transactions using machine l
 
 - Scaled numerical features using StandardScaler
 
-- Created an HourOfDay feature from the step column to analyze hourly transaction trends
-
-- Sampled 10% of the dataset for faster processing
+- Sampled 30% of the dataset for faster processing
 
 ### Exploratory Data Analysis (EDA): 
 
 - Visualizations:
-
+     
    - Bar and line plots of hourly transaction activity
 
    - Box plots to analyze transaction amounts
