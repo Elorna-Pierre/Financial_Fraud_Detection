@@ -5,6 +5,7 @@
 ## Overview:
 
 The purpose of this project is to detect fraudulent transactions using machine learning techniques. The dataset contains various transaction details, and the focus is on identifying fraud based on key features like transaction type, amount, and account balances.
+
 Dataset:
 
 * Source: Cleaned financial transaction dataset
