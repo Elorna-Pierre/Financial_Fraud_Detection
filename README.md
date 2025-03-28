@@ -62,38 +62,38 @@ The purpose of this project is to detect fraudulent transactions using machine l
 
     - Applied RandomizedSearchCV to optimize model parameters
 
-Selected best parameters for improved F1-score
+    - Selected best parameters for improved F1-score
 
-Performance Metrics:
+- Performance Metrics:
 
-Accuracy
+  - Accuracy
 
-Precision
+  - Precision
 
-Recall
+  - Recall
 
-F1-score
+  - F1-score
 
-Confusion Matrix visualization
+  - Confusion Matrix visualization
 
-Results
+### Results
 
-The optimized Gradient Boosting Classifier achieved the best F1-score
+  - The optimized Gradient Boosting Classifier achieved the best F1-score
 
-Important features influencing fraud detection include transaction amount, balance differences, and transaction type
+  - Important features influencing fraud detection include transaction amount, balance differences, and transaction type
 
-Future Improvements
+### Future Improvements
 
-Implement deep learning techniques for enhanced fraud detection
+  - Implement deep learning techniques for enhanced fraud detection
 
-Incorporate real-time fraud detection using streaming data
+  - Incorporate real-time fraud detection using streaming data
 
-Experiment with anomaly detection methods
+  - Experiment with anomaly detection methods
 
-How to Run
+### How to Run
 
-Ensure you have Python installed along with required libraries (pandas, numpy, matplotlib, seaborn, sklearn)
+1. Ensure you have Python installed along with required libraries (pandas, numpy, matplotlib, seaborn, sklearn)
 
-Run the data preprocessing notebook to clean and prepare the dataset
+2. Run the data preprocessing notebook to clean and prepare the dataset
 
-Execute the model training notebook to train and evaluate fraud detection models
+3. Execute the model training notebook to train and evaluate fraud detection models
