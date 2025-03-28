@@ -32,16 +32,17 @@ Dataset:
 ## Exploratory Data Analysis (EDA):
 
 * Visualizations:
-    * Bar and line plots of hourly transaction activity
+    * Bar and Pie charts to transaction type distributions
+    * Line plots of hourly transaction activity
     * Pair plots to analyze the relationship between numeric features
     * Scatter plots to examine balance changes
     * Confusion matrices for model evaluation
 
 ![alt text](image.png)
 
-![alt text](ReadMeimage-2.png)
-
 ![alt text](image-1.png) 
+
+![alt text](ReadMeimage-2.png)
 
 ![alt text](ReadMeimage-4.png)
 
