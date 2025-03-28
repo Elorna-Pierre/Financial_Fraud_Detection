@@ -26,6 +26,8 @@ Dataset:
 * Scaled numerical features using StandardScaler
 * Sampled 30% of the dataset for faster processing
 
+![alt text](image-7.png) 
+
 
 ## Exploratory Data Analysis (EDA):
 
@@ -114,6 +116,14 @@ F1 Score: 0.8840
     accuracy                           1.00    166225
    macro avg       0.99      0.90      0.94    166225
 weighted avg       1.00      1.00      1.00    166225
+</pre>
+
+![alt text](image-6.png)
+
+<pre>
+Final Model Results:
+Accuracy: 0.9993
+F1 Score: 0.8793
 </pre>
 
 ## Future Improvements
