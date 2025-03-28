@@ -31,11 +31,15 @@ Dataset:
 
 * Visualizations:
     * Bar and line plots of hourly transaction activity
-    * Pair plots to analyze transaction amounts
+    * Pair plots to analyze the relationship between numeric features
     * Scatter plots to examine balance changes
     * Confusion matrices for model evaluation
 
 ![alt text](image-3.png) 
+
+![alt text](image-4.png) 
+
+![alt text](image-5.png)
 
 
 
@@ -46,6 +50,44 @@ Dataset:
     * Hyperparameter Tuning:
     * Applied RandomizedSearchCV to optimize model parameters
     * Selected best parameters for improved F1-score
+
+<pre>
+# Dictionary to store results
+model_results = {}
+
+# Train models with default parameters to find the best one
+models = {
+    "Logistic Regression": LogisticRegression(),
+    "Naive Bayes": GaussianNB(),
+    "kNN Classifier": KNeighborsClassifier(),
+    "SVM Classifier": SVC(),
+    "Random Forest": RandomForestClassifier(random_state=42),
+    "Gradient Boosting": GradientBoostingClassifier(random_state=42)
+}
+
+print("\nTraining models with default parameters...\n")
+for name, model in models.items():
+    acc, f1 = train_evaluate_model(model, name)
+    model_results[name] = {'Accuracy': acc, 'F1 Score': f1}
+
+    # Find best model based on F1 Score
+best_model_name = max(model_results, key=lambda k: model_results[k]['F1 Score'])
+print(f"\nBest performing model: {best_model_name}")
+
+# Define hyperparameter tuning for best model
+param_grids = {
+    "Logistic Regression": {'C': uniform(0.1, 10), 'solver': ['liblinear', 'saga'], 'max_iter': [100, 200]},
+    "Naive Bayes": {'var_smoothing': np.logspace(0,-9, num=100)},
+    "kNN Classifier": {'n_neighbors': randint(3, 20), 'weights': ['uniform', 'distance'], 'p': [1, 2]},
+    "SVM Classifier": {'C': uniform(0.1, 10), 'kernel': ['linear', 'rbf'], 'gamma': ['scale', 'auto']},
+    "Random Forest": {'n_estimators': randint(50, 200), 'max_depth': randint(3, 20), 
+                      'min_samples_split': randint(2, 10), 'min_samples_leaf': randint(1, 10), 'bootstrap': [True, False]},
+    "Gradient Boosting": {'n_estimators': randint(50, 200), 'learning_rate': uniform(0.01, 0.2),
+                          'max_depth': randint(3, 20), 'min_samples_split': randint(2, 10), 'min_samples_leaf': randint(1, 10)}
+
+</pre>
+
+
 * Performance Metrics:
     * Accuracy
     * Precision
@@ -60,7 +102,7 @@ Dataset:
 
 ![alt text](image.png) 
 
-<prev>
+<pre>
 Random Forest Performance:
 Accuracy: 0.9994
 F1 Score: 0.8840
@@ -72,7 +114,7 @@ F1 Score: 0.8840
     accuracy                           1.00    166225
    macro avg       0.99      0.90      0.94    166225
 weighted avg       1.00      1.00      1.00    166225
-</prev>
+</pre>
 
 ## Future Improvements
 
